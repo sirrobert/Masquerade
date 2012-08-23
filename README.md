@@ -91,17 +91,20 @@ they were Perl.
 The following examples let you access JSON strings as if it were Perl:
 
 ```perl6
-
 use Masquerade;
 
 my $json = '{"foo": "bar"}';
-
-my $value = ($json but AsIf::Perl)<foo>;
-
-say $value; # bar
+say ($json but AsIf::Perl)<foo>;  # bar
 ```
 
-This is a read-only operation right now.
+```perl6
+use Masquerade;
+
+my $json = '[12.4, "pickle"]';
+say ($json but AsIf::Perl)[1];  # pickle
+```
+
+These are read-only operations right now.
 
 
 
