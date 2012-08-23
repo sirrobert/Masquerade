@@ -3,7 +3,7 @@ use Test;
 plan 3;
 
 # Load the module
-use Masquerade::AsIf::JSON;
+use Masquerade;
 
 # Predeclare a reusable variable for the expected jsonification.
 my $expected;
