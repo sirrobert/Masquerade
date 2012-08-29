@@ -13,13 +13,11 @@ sub asif-yaml ($obj) {
 
 # Render as string.
 method Str () {
-  warn 'in str';
   return asif-yaml(self);
 }
 
 # Outsource gist to Str.
 method gist () {
-  warn 'in gist';
   return self.Str();
 }
 
