@@ -23,6 +23,11 @@ my %test-data = {
     yaml => "- 1\n- 2\n- 3\n",
   },
 
+  'array of pairs' => {
+    perl => [a=>1, b=>2, c=>3],
+    yaml => "- a: 1\n- b: 2\n- c: 3\n",
+  },
+  
 
   'complex nested: hash array string int float' => {
     perl => {

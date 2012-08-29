@@ -13,11 +13,13 @@ sub asif-yaml ($obj) {
 
 # Render as string.
 method Str () {
+  warn 'in str';
   return asif-yaml(self);
 }
 
 # Outsource gist to Str.
 method gist () {
+  warn 'in gist';
   return self.Str();
 }
 
@@ -37,52 +39,43 @@ sub post-process (Str $str is rw, Int $depth) {
 # add it upon request).
 multi sub _render(%hash, Int $depth = 0) {
   my Str $output;
-
   pre-process($output, $depth);
-
   my $strlen = 0;
   for %hash.keys -> $k {
     $strlen = $k.chars if $k.chars > $strlen;
   }
 
-
   for %hash.kv -> $k, $v {
     $output ~= '  ' x $depth;
     $output ~= sprintf("%-{$strlen + 1}s ", "$k:") ~ _render($v, $depth+1);
   }
-
   post-process($output, $depth);
-
   return $output;
 }
 
 multi sub _render (@array, Int $depth = 0) {
   my Str $output;
-
   pre-process($output, $depth);
-
   for @array -> $element {
     $output ~= '  ' x $depth ~ '- ' ~ _render($element, $depth + 1);
   }
-
   post-process($output, $depth);
-
   return $output;
+}
+
+multi sub _render (Pair $pair, Int $depth=0) {
+  return _render({$pair.key => $pair.value});
 }
 
 multi sub _render (Str $str, Int $depth = 0) {
   my Str $output;
-
   $output ~= "$str\n";
-
   return $output;
 }
 
 multi sub _render (Numeric $num, Int $depth = 0) {
   my Str $output;
-
   $output = $num.Str ~ "\n";
-
   return $output;
 }
 
