@@ -107,12 +107,88 @@ say ($json but AsIf::Perl)[1];  # pickle
 These are read-only operations right now.
 
 
+===AsIf::YAML
 
+Let's say you have some objects and want to render them as YAML.  No
+problem-- just `say` them, `but AsIf::YAML`.
 
+```perl6
+use Masquerade;
 
+my %tornado = { 
+  size        => "medium",
+  damage      => "high",
+  affects     => [<Houses Barns Cars Chickens Cows>],
+  attributes  => {
+    twistiness  => 100,
+    color       => 'brown/grey',
+    scariness   => 6,
+    speed       => {
+      velocity  => '92mph',
+      direction => 'at YOU!',
+    }   
+  },  
+};
 
+say %tornado but AsIf::YAML;
+```
 
+This produces the following output:
 
+```
+size:       medium
+damage:     high
+affects:    
+  - Houses
+  - Barns
+  - Cars
+  - Chickens
+  - Cows
+attributes: 
+  twistiness: 100
+  color:      brown/grey
+  scariness:  6
+  speed:      
+    velocity:  92mph
+    direction: at YOU!
+```
+
+In addition to perl's built-in data structures, you can also do a rendering of custom objects.
+
+```perl6
+use Masquerade;
+
+class TestClass {
+  has $.animal = "monkey";
+  has $.money  = "dollar";
+  has @.veggies;
+  has %.cities;
+};
+
+my $test = TestClass.new(
+  veggies => <zucchini squash broccoli>,
+  cities  => {
+    London => 'England',
+    Durham => 'The United States of America',
+  }   
+);  
+
+say $test but AsIf::YAML;
+```
+
+This produces the following output:
+
+```
+animal:  monkey
+money:   dollar
+veggies: 
+  - zucchini
+  - squash
+  - broccoli
+cities:  
+  London: England
+  Durham: The United States of America
+```
 
 
 
