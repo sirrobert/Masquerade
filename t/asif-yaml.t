@@ -1,6 +1,6 @@
 use v6;
 use Test;
-plan 1;
+plan 4;
 
 # Load the module
 use Masquerade;
