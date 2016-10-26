@@ -1,4 +1,5 @@
 {
+  "perl"        : "6.*",
   "name"        : "Masquerade",
   "version"     : "*",
   "description" : "Let Perl 6 constructs masquerade as other things.",
